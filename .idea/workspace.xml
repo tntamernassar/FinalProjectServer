@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8132d5b9-144f-4c37-928a-0e5f6c44af97" name="Default Changelist" comment="" />
+    <list default="true" id="8132d5b9-144f-4c37-928a-0e5f6c44af97" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NetworkLayer/ConnectionHandler.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NetworkLayer/Protocol.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NetworkLayer/Server.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Runner.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="package.json" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -17,9 +33,20 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="13.12.0" />
+    <property name="javascript.nodejs.core.library.typings.version" value="13.13.52" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/NetworkLayer" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\tamernas\PycharmProjects\TGRServer\NetworkLayer" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -29,11 +56,39 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1639511754622</updated>
-      <workItem from="1639511755688" duration="1797000" />
+      <workItem from="1639511755688" duration="2425000" />
+      <workItem from="1639660032717" duration="13000" />
+      <workItem from="1639764201172" duration="2504000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <created>1639513851436</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1639513851436</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1655" y="97" key="CommitChangelistDialog2" timestamp="1639513850378">
+      <screen x="-2560" y="0" width="2560" height="1040" />
+    </state>
+    <state x="-1655" y="97" key="CommitChangelistDialog2/0.0.1536.824/-2560.0.2560.1040@-2560.0.2560.1040" timestamp="1639513850378" />
+    <state x="-1688" y="253" key="Vcs.Push.Dialog.v2" timestamp="1639513867561">
+      <screen x="-2560" y="0" width="2560" height="1040" />
+    </state>
+    <state x="-1688" y="253" key="Vcs.Push.Dialog.v2/0.0.1536.824/-2560.0.2560.1040@-2560.0.2560.1040" timestamp="1639513867561" />
+    <state x="-1304" y="240" key="run.anything.popup" timestamp="1639765005633">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1304" y="240" key="run.anything.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1639765005633" />
   </component>
 </project>
