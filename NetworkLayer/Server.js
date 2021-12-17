@@ -24,7 +24,6 @@ class Server{
         });
 
         web_socketserver.on('request', (request)=>{
-            console.log("connection coming");
             let connection = request.accept(null, request.origin);
             let connectionHandler = new ConnectionHandler(connection);
             connection.on('message', (message)=>{
