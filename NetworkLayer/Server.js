@@ -1,4 +1,5 @@
 const http = require('http');
+const fs = require('fs');
 const WebSocketServer = require('websocket').server;
 const Protocol = require("./Protocol");
 const ConnectionHandler = require("./ConnectionHandler");
