@@ -1,11 +1,11 @@
 const LocalDatabase = require('../../Databases/LocalDatabase/LocalDatabase');
-const EmailService = require('../../Services/EmailService/EmailService');
+const MockEmailService = require('../../Services/EmailService/MockEmailService');
 
 class UsersManager{
 
     constructor() {
         this.db = LocalDatabase.get_instance();
-        this.email_service = EmailService.get_instance();
+        this.email_service = MockEmailService.get_instance();
     }
 
     generate_uid(length, cont){

@@ -1,4 +1,4 @@
-let EmailService = require("./EmailService/EmailService");
+let MockEmailService = require("./EmailService/MockEmailService");
 let FileService = require("./FileService/FileService");
 
 
@@ -11,7 +11,7 @@ class Services {
                 console.error("Can't read info/email.json");
             }else{
                 let email_info = JSON.parse(data);
-                EmailService.init(email_info.email, email_info.password);
+                MockEmailService.init(email_info.email, email_info.password);
                 cont();
             }
         });
