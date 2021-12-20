@@ -34,18 +34,6 @@ class LocalDatabase{
         });
     }
 
-    executeSyncSearch(_sql, _params) {
-        let self = this;
-        self.db.
-        self.db.all(_sql, _params, (err, rows) => {
-            if (err) {
-                if (_err)
-                    _err(err);
-            } else {
-                _callback(rows);
-            }
-        });
-    }
 
     executeUpdate(_sql, _params, _cont, _err) {
         let self = this;

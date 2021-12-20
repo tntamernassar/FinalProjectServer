@@ -1,10 +1,11 @@
 const UsersManager = require("../Logic/Users/UsersManager");
-
+const LocalDatabase = require("../Databases/LocalDatabase/LocalDatabase");
 
 class Protocol {
 
     constructor() {
         this.usersManager = new UsersManager();
+        this.local_database = LocalDatabase.get_instance();
     }
 
 
@@ -43,81 +44,50 @@ class Protocol {
      * **/
     get_machines(connectionHandler, request){
         let id = request["id"];
-        connectionHandler.sendMessage(JSON.stringify({
-            id: id,
-            machines: [
-                {
-                    "name": "A1",
-                    "state": "UP",
-                    "attributes": [{"a1":1221, "a2": 62, "a3": "ABC"}]
-                },
-                {
-                    "name": "A2",
-                    "state": "PM",
-                    "attributes": [{"a1":32, "a2": 8767, "a3": "XYZ"}]
-                },
-                {
-                    "name": "A3",
-                    "state": "DOWN",
-                    "attributes": [{"a1":1245, "a2": 3234, "a3": "DFY"}]
-                },
-                {
-                    "name": "A4",
-                    "state": "UP",
-                    "attributes": [{"a1":2, "a2": 312, "a3": "TLM"}]
-                },
-                {
-                    "name": "A4",
-                    "state": "UP",
-                    "attributes": [{"a1":2, "a2": 312, "a3": "TLM"}]
-                },
-                {
-                    "name": "A4",
-                    "state": "UP",
-                    "attributes": [{"a1":2, "a2": 312, "a3": "TLM"}]
-                },
-                {
-                    "name": "A4",
-                    "state": "UP",
-                    "attributes": [{"a1":2, "a2": 312, "a3": "TLM"}]
-                },
-                {
-                    "name": "A4",
-                    "state": "UP",
-                    "attributes": [{"a1":2, "a2": 312, "a3": "TLM"}]
-                },
-                {
-                    "name": "A4",
-                    "state": "UP",
-                    "attributes": [{"a1":2, "a2": 312, "a3": "TLM"}]
-                },
-                {
-                    "name": "A4",
-                    "state": "UP",
-                    "attributes": [{"a1":2, "a2": 312, "a3": "TLM"}]
-                },
-                {
-                    "name": "A4",
-                    "state": "UP",
-                    "attributes": [{"a1":2, "a2": 312, "a3": "TLM"}]
-                },
-                {
-                    "name": "A4",
-                    "state": "UP",
-                    "attributes": [{"a1":2, "a2": 312, "a3": "TLM"}]
-                },
-                {
-                    "name": "A4",
-                    "state": "UP",
-                    "attributes": [{"a1":2, "a2": 312, "a3": "TLM"}]
-                },
-                {
-                    "name": "A4",
-                    "state": "UP",
-                    "attributes": [{"a1":2, "a2": 312, "a3": "TLM"}]
-                }
-            ]
-        }));
+        let department = request["department"];
+        this.local_database.executeSearch("SELECT * FROM DepartmentMachines WHERE department=?", [department], (rows)=>{
+            let machines = rows.map((row)=> { return {"machine": row["machine"], "state": row["state"]}});
+            let result = [];
+
+            machines.forEach((machine_row, index)=>{
+                let machine = machine_row["machine"];
+                let state = machine_row["state"];
+                this.local_database.executeSearch("SELECT * FROM MachineAttributes WHERE department=? AND machine=?",[department, machine], (_rows)=>{
+
+                    let attributes = _rows.map((row)=>row["attribute"]);
+                    // read values
+                    console.log(attributes);
+                    result.push({
+                        name: machine,
+                        state: state,
+                        attributes: [{"a1":1221, "a2": 62, "a3": "ABC"}]
+                    });
+
+                    if (index == machines.length - 1){
+                        console.log(result);
+                        connectionHandler.sendMessage(JSON.stringify({
+                            id: id,
+                            machines: result
+                        }));
+                    }
+
+                }, (err)=>{
+                    connectionHandler.send(JSON.stringify({
+                        id: id,
+                        success: false,
+                        error: err
+                    }));
+                });
+            });
+
+
+        }, (err)=>{
+            connectionHandler.send(JSON.stringify({
+                id: id,
+                success: false,
+                error: err
+            }));
+        });
     }
 
     request_login(connectionHandler, request){
