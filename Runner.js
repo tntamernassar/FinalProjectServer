@@ -9,4 +9,3 @@ Services.init(root, undefined, ()=>{
     const server = Server.createServer();
     server.server(8080, "localhost");
 });
-cd
