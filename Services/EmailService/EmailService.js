@@ -5,6 +5,7 @@ class EmailService{
     static instance;
 
     static init(email, password) {
+        console.log("Initializing email service");
         this.instance = new EmailService(email, password);
     };
 
@@ -42,7 +43,9 @@ class EmailService{
 
     sendMail(mailOptions, cont){
         this.transporter.sendMail(mailOptions, function(error, info){
-            cont(error, info);
+            if (cont) {
+                cont(error, info);
+            }
         });
     }
 

@@ -3,6 +3,7 @@ let FileService = require("./FileService/FileService");
 
 
 class Services {
+
     static init(local_dir, fs_dir, cont){
         FileService.init(local_dir, fs_dir);
         FileService.get_instance().read_local("info/email.json", (err, data)=>{

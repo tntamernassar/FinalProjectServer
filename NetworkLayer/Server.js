@@ -1,5 +1,4 @@
 const http = require('http');
-const fs = require('fs');
 const WebSocketServer = require('websocket').server;
 const Protocol = require("./Protocol");
 const ConnectionHandler = require("./ConnectionHandler");
@@ -12,11 +11,11 @@ class Server{
         return new Server();
     }
 
-    server() {
+    server(port, host) {
         const server = http.createServer();
         const protocol = Protocol.createProtocol();
 
-        server.listen(8080, "localhost", ()=>{
+        server.listen(port, host, ()=>{
             console.log("Running HTTP server");
         });
 

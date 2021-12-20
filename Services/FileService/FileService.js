@@ -4,6 +4,7 @@ class FileService {
     static instance;
 
     static init(local_dir, fs_dir){
+        console.log("Initializing file service");
         this.instance = new FileService(local_dir, fs_dir);
     }
 

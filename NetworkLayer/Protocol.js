@@ -1,10 +1,10 @@
+const UsersManager = require("../Logic/Users/UsersManager");
+
 
 class Protocol {
 
     constructor() {
-        this.protocol_map = {
-            "get_machines": this.get_machines
-        };
+        this.usersManager = new UsersManager();
     }
 
 
@@ -14,11 +14,16 @@ class Protocol {
 
     on_message(connectionHandler, request){
         let action = request["action"];
-        if (action in this.protocol_map){
-            this.protocol_map[action](connectionHandler, request);
-        }else{
-            console.error("Unknown action :" + action)
+        if (action === "get_machines"){
+            this.get_machines(connectionHandler, request);
+        }else if (action === "request_login"){
+            this.request_login(connectionHandler, request)
+        }else if (action === "confirmation"){
+            this.confirmation(connectionHandler, request);
+        }else {
+            console.error("unknown action: " + action);
         }
+
     }
 
 
@@ -113,6 +118,35 @@ class Protocol {
                 }
             ]
         }));
+    }
+
+    request_login(connectionHandler, request){
+        let id = request["id"];
+        let email = request["email"];
+        if (email){
+            this.usersManager.request_login(email, (uid)=>{
+                connectionHandler.sendMessage(JSON.stringify({id: id, success: true}));
+            }, (err)=>{
+                connectionHandler.sendMessage(JSON.stringify({id: id, success: false}));
+                console.error(err);
+            });
+        }
+    }
+
+    confirmation(connectionHandler, request){
+        let id = request["id"];
+        let email = request["email"];
+        let confirmation = request["confirmation"];
+        this.usersManager.confirmation(email, confirmation, (success, user)=>{
+            if (success){
+                connectionHandler.sendMessage(JSON.stringify({id: id, success: success, user: user}));
+            }else{
+                connectionHandler.sendMessage(JSON.stringify({id: id, success: success}));
+            }
+        }, (err)=>{
+            console.error(err);
+            connectionHandler.sendMessage(JSON.stringify({id: id, success: false}));
+        });
     }
 
 }
