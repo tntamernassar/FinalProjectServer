@@ -1,11 +1,13 @@
 const UsersManager = require("../Logic/Users/UsersManager");
 const LocalDatabase = require("../Databases/LocalDatabase/LocalDatabase");
+const FileService = require("../Services/FileService/FileService");
 
 class Protocol {
 
     constructor() {
         this.usersManager = new UsersManager();
         this.local_database = LocalDatabase.get_instance();
+        this.file_service = FileService.get_instance();
     }
 
 
@@ -43,51 +45,70 @@ class Protocol {
      * Preform IO operation to read the data from the "FileSystem"
      * **/
     get_machines(connectionHandler, request){
+        const get_attributes = (machine_name, attributes, MachineInfo)=>{
+            let machine_json = MachineInfo.filter((m)=>m["machine"] == machine_name)[0];
+            let machine_attributes = {};
+            for (let i in attributes){
+                let attribute_name = attributes[i];
+                let attribute_value = machine_json["attributes"].filter((_)=>_["name"] == attribute_name);
+                if (attribute_value.length == 0){
+                    machine_attributes[attribute_name] = null;
+                }else{
+                    machine_attributes[attribute_name] = attribute_value[0]["value"];
+                }
+            }
+            return machine_attributes;
+        };
         let id = request["id"];
         let department = request["department"];
-        this.local_database.executeSearch("SELECT * FROM DepartmentMachines WHERE department=?", [department], (rows)=>{
-            let machines = rows.map((row)=> { return {"machine": row["machine"], "state": row["state"]}});
-            let result = [];
+        this.file_service.read_fs("MachineInfo.json", (err, content)=>{
+            let MachineInfo = JSON.parse(content)["machines"];
 
-            machines.forEach((machine_row, index)=>{
-                let machine = machine_row["machine"];
-                let state = machine_row["state"];
-                this.local_database.executeSearch("SELECT * FROM MachineAttributes WHERE department=? AND machine=?",[department, machine], (_rows)=>{
+            this.local_database.executeSearch("SELECT * FROM DepartmentMachines WHERE department=?", [department], (rows)=>{
+                let machines = rows.map((row)=> { return {"machine": row["machine"], "state": row["state"]}});
+                let result = [];
 
-                    let attributes = _rows.map((row)=>row["attribute"]);
-                    // read values
-                    console.log(attributes);
-                    result.push({
-                        name: machine,
-                        state: state,
-                        attributes: [{"a1":1221, "a2": 62, "a3": "ABC"}]
-                    });
+                machines.forEach((machine_row, index)=>{
+                    let machine = machine_row["machine"];
+                    let state = machine_row["state"];
+                    this.loc
+                    this.local_database.executeSearch("SELECT * FROM MachineAttributes WHERE department=? AND machine=?",[department, machine], (_rows)=>{
 
-                    if (index == machines.length - 1){
-                        console.log(result);
-                        connectionHandler.sendMessage(JSON.stringify({
+                        let attributes = _rows.map((row)=>row["attribute"]);
+                        // read values
+                        result.push({
+                            name: machine,
+                            state: state,
+                            attributes: get_attributes(machine, attributes, MachineInfo)
+                        });
+
+                        if (index == machines.length - 1){
+                            connectionHandler.sendMessage(JSON.stringify({
+                                id: id,
+                                machines: result
+                            }));
+                        }
+
+                    }, (err)=>{
+                        connectionHandler.send(JSON.stringify({
                             id: id,
-                            machines: result
+                            success: false,
+                            error: err
                         }));
-                    }
-
-                }, (err)=>{
-                    connectionHandler.send(JSON.stringify({
-                        id: id,
-                        success: false,
-                        error: err
-                    }));
+                    });
                 });
+
+
+            }, (err)=>{
+                connectionHandler.send(JSON.stringify({
+                    id: id,
+                    success: false,
+                    error: err
+                }));
             });
 
-
-        }, (err)=>{
-            connectionHandler.send(JSON.stringify({
-                id: id,
-                success: false,
-                error: err
-            }));
         });
+
     }
 
     request_login(connectionHandler, request){

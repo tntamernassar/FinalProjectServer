@@ -26,6 +26,10 @@ class FileService {
         fs.readFile(this.local_dir + "/" + path, cont);
     }
 
+    read_fs(path, cont){
+        fs.readFile(this.fs_dir + "/" + path, cont);
+    }
+
 
 }
 
