@@ -1,11 +1,11 @@
 const LocalDatabase = require('../../Databases/LocalDatabase/LocalDatabase');
-const MockEmailService = require('../../Services/EmailService/MockEmailService');
+const Services = require("../../Services/Services");
 
 class UsersManager{
 
     constructor() {
         this.db = LocalDatabase.get_instance();
-        this.email_service = MockEmailService.get_instance();
+        this.email_service = Services.email_service;
     }
 
     generate_uid(length, cont){
@@ -40,7 +40,7 @@ class UsersManager{
                         _cont(uid);
                     }, err);
                 }else{
-                    this.db.executeUpdate("INSERT INTO Users values(?,?,?,?,?)", [uid, email, "fname", "lname", uid], ()=>{
+                    this.db.executeUpdate("INSERT INTO Users values(?,?,?,?,?,?)", [uid, email, "fname", "lname", uid, 0], ()=>{
                         _cont(uid);
                     }, err)
                 }
@@ -55,7 +55,6 @@ class UsersManager{
                 err("Email not found");
             }else{
                 let user = rows[0];
-                console.log(user)
                 let uid = user["uid"];
                 if (uid === confirmation){
                     cont(true, user);

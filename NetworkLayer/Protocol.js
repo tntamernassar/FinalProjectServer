@@ -1,19 +1,20 @@
 const UsersManager = require("../Logic/Users/UsersManager");
-const LocalDatabase = require("../Databases/LocalDatabase/LocalDatabase");
-const FileService = require("../Services/FileService/FileService");
+const MachinesManager = require("../Logic/Machines/MachinesManager");
+const ReportsManager = require("../Logic/Reports/ReportsManager");
 
 class Protocol {
-
-    constructor() {
-        this.usersManager = new UsersManager();
-        this.local_database = LocalDatabase.get_instance();
-        this.file_service = FileService.get_instance();
-    }
-
 
     static createProtocol(){
         return new Protocol();
     }
+
+
+    constructor() {
+        this.usersManager = new UsersManager();
+        this.machineManager = new MachinesManager();
+        this.reportManager = new ReportsManager();
+    }
+
 
     on_message(connectionHandler, request){
         let action = request["action"];
@@ -23,6 +24,8 @@ class Protocol {
             this.request_login(connectionHandler, request)
         }else if (action === "confirmation"){
             this.confirmation(connectionHandler, request);
+        }else if (action == "get_report"){
+            this.get_report(connectionHandler, request);
         }else {
             console.error("unknown action: " + action);
         }
@@ -32,85 +35,54 @@ class Protocol {
 
     /**
      * action: get_machines
-     * params: flat - flat name
+     *
+     * params: department - department name
      *
      * return list of all machines m for the given flat
+     *
      * m = {
+     *
      *     'name': name of the machine
+     *
      *     'attributes': defined attribute and values of the machine
+     *
      *     'state': UP/DOWN/PM
+     *
      * }
      *
      * Preform DB operation to read configurations from "Local Database"
+     *
      * Preform IO operation to read the data from the "FileSystem"
      * **/
     get_machines(connectionHandler, request){
-        const get_attributes = (machine_name, attributes, MachineInfo)=>{
-            let machine_json = MachineInfo.filter((m)=>m["machine"] == machine_name)[0];
-            let machine_attributes = {};
-            for (let i in attributes){
-                let attribute_name = attributes[i];
-                let attribute_value = machine_json["attributes"].filter((_)=>_["name"] == attribute_name);
-                if (attribute_value.length == 0){
-                    machine_attributes[attribute_name] = null;
-                }else{
-                    machine_attributes[attribute_name] = attribute_value[0]["value"];
-                }
-            }
-            return machine_attributes;
-        };
         let id = request["id"];
-        let department = request["department"];
-        this.file_service.read_fs("MachineInfo.json", (err, content)=>{
-            let MachineInfo = JSON.parse(content)["machines"];
-
-            this.local_database.executeSearch("SELECT * FROM DepartmentMachines WHERE department=?", [department], (rows)=>{
-                let machines = rows.map((row)=> { return {"machine": row["machine"], "state": row["state"]}});
-                let result = [];
-
-                machines.forEach((machine_row, index)=>{
-                    let machine = machine_row["machine"];
-                    let state = machine_row["state"];
-                    this.loc
-                    this.local_database.executeSearch("SELECT * FROM MachineAttributes WHERE department=? AND machine=?",[department, machine], (_rows)=>{
-
-                        let attributes = _rows.map((row)=>row["attribute"]);
-                        // read values
-                        result.push({
-                            name: machine,
-                            state: state,
-                            attributes: get_attributes(machine, attributes, MachineInfo)
-                        });
-
-                        if (index == machines.length - 1){
-                            connectionHandler.sendMessage(JSON.stringify({
-                                id: id,
-                                machines: result
-                            }));
-                        }
-
-                    }, (err)=>{
-                        connectionHandler.send(JSON.stringify({
-                            id: id,
-                            success: false,
-                            error: err
-                        }));
-                    });
-                });
-
-
-            }, (err)=>{
-                connectionHandler.send(JSON.stringify({
-                    id: id,
-                    success: false,
-                    error: err
-                }));
-            });
-
+        this.machineManager.get_machines(connectionHandler, request, (result)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+                machines: result
+            }));
+        }, (err)=>{
+            connectionHandler.send(JSON.stringify({
+                id: id,
+                success: false,
+                error: err
+            }));
         });
-
     }
 
+
+    /**
+     * action: request_login
+     *
+     * params: email - corporate email of the user
+     *
+     * return success flag
+     *
+     * Preform DB operation to read/write from "Local Database"
+     *
+     * Preform Network operation to send confirmation email
+     * **/
     request_login(connectionHandler, request){
         let id = request["id"];
         let email = request["email"];
@@ -124,6 +96,19 @@ class Protocol {
         }
     }
 
+    /**
+     * action: confirmation
+     *
+     * params:
+     *
+     * email - corporate email of the user
+     *
+     * confirmation - confirmation code of the user
+     *
+     * return success flag and user object
+     *
+     * Preform DB operation to read from "Local Database" and "Remote Database"
+     * **/
     confirmation(connectionHandler, request){
         let id = request["id"];
         let email = request["email"];
@@ -140,6 +125,26 @@ class Protocol {
         });
     }
 
+
+
+    get_report(connectionHandler, request){
+        let id = request["id"];
+        let report = request["report"];
+
+        this.reportManager.get_report_data(report, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        },(report_data)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: true,
+                data: report_data
+            }));
+        });
+    }
 }
 
 

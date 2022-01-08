@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8132d5b9-144f-4c37-928a-0e5f6c44af97" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Databases/LocalDatabase/LocalDatabase.js" beforeDir="false" afterPath="$PROJECT_DIR$/Databases/LocalDatabase/LocalDatabase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NetworkLayer/Protocol.js" beforeDir="false" afterPath="$PROJECT_DIR$/NetworkLayer/Protocol.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +77,9 @@
       <workItem from="1639660032717" duration="13000" />
       <workItem from="1639764201172" duration="7812000" />
       <workItem from="1639847008786" duration="3260000" />
-      <workItem from="1640013384704" duration="6920000" />
+      <workItem from="1640013384704" duration="8951000" />
+      <workItem from="1640114888042" duration="7839000" />
+      <workItem from="1640248205497" duration="2119000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1639513851436</created>
@@ -144,7 +144,21 @@
       <option name="project" value="LOCAL" />
       <updated>1640019525662</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Reading machines from local database">
+      <created>1640024113430</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1640024113430</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Reading machines attributes from file system">
+      <created>1640127751486</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1640127751486</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,38 +169,44 @@
     <MESSAGE value="Constructing connection pipe" />
     <MESSAGE value="login functionality" />
     <MESSAGE value="Adding email mock" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding email mock" />
+    <MESSAGE value="Reading machines from local database" />
+    <MESSAGE value="Reading machines attributes from file system" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reading machines attributes from file system" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1241" y="97" key="CommitChangelistDialog2" timestamp="1640019523347">
+    <state x="-1241" y="97" key="CommitChangelistDialog2" timestamp="1640127748939">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="-1241" y="97" key="CommitChangelistDialog2/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640019523347" />
+    <state x="-1241" y="97" key="CommitChangelistDialog2/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640127748939" />
     <state x="-1655" y="97" key="CommitChangelistDialog2/0.0.1536.824/-2560.0.2560.1040@-2560.0.2560.1040" timestamp="1639513850378" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1640018216162">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1640086114020">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640018216162" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1640018216161">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640086114020" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1640086114020">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640018216161" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1640018216161">
+    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640086114020" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1640086114020">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640018216161" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1640018216162">
+    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640086114020" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1640086114020">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640018216162" />
-    <state x="-1266" y="253" key="Vcs.Push.Dialog.v2" timestamp="1640019529380">
+    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640086114020" />
+    <state x="-1266" y="253" key="Vcs.Push.Dialog.v2" timestamp="1640127759872">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="-1266" y="253" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640019529380" />
+    <state x="-1266" y="253" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640127759872" />
     <state x="-1688" y="253" key="Vcs.Push.Dialog.v2/0.0.1536.824/-2560.0.2560.1040@-2560.0.2560.1040" timestamp="1639513867561" />
     <state x="-1304" y="240" key="run.anything.popup" timestamp="1639765005633">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
     <state x="-1304" y="240" key="run.anything.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1639765005633" />
+    <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1640126571614">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640126571614" />
   </component>
 </project>

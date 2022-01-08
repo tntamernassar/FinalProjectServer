@@ -1,6 +1,7 @@
+const EmailService = require("./EmailService");
 
 
-class MockEmailService{
+class MockEmailService extends EmailService{
     static instance;
 
     static init(email, password) {
@@ -13,7 +14,7 @@ class MockEmailService{
     }
 
     constructor(email, password){
-        this.email = email;
+        super(email, password);
     }
 
 
@@ -37,6 +38,7 @@ class MockEmailService{
     sendTextEmail(to, subject, body, cont){
         this.sendMail(this.createMailOption(to, subject, body, ''), cont);
     }
+
 
     sendHTMLEmail(to, subject, html, cont){
         this.sendMail(this.createMailOption(to, subject, '', html), cont);
