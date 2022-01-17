@@ -29,7 +29,6 @@ class Protocol {
         }else {
             console.error("unknown action: " + action);
         }
-
     }
 
 
@@ -126,7 +125,17 @@ class Protocol {
     }
 
 
-
+    /**
+     * action: get_report
+     *
+     * params:
+     *
+     * report - the desired report
+     *
+     * return report data
+     *
+     * Preform IO operation to read the report data from "FileSystem"
+     * **/
     get_report(connectionHandler, request){
         let id = request["id"];
         let report = request["report"];

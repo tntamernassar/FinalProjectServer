@@ -5,6 +5,8 @@ class ReportsManager{
 
     static mappings = {
         "tracers": "Tracers.json",
+        "e3": "E3.json",
+        "counters": "Counters.json"
     };
 
     constructor() {
