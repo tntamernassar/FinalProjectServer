@@ -62,7 +62,7 @@ class Protocol {
                 machines: result
             }));
         }, (err)=>{
-            connectionHandler.send(JSON.stringify({
+            connectionHandler.sendMessage(JSON.stringify({
                 id: id,
                 success: false,
                 error: err
@@ -94,6 +94,7 @@ class Protocol {
             });
         }
     }
+
 
     /**
      * action: confirmation
@@ -154,6 +155,33 @@ class Protocol {
             }));
         });
     }
+
+
+    /**
+     * action: get_users
+     *
+     * return all users
+     *
+     * Preform DB operation to read the users from "Local database"
+     * **/
+    get_users(connectionHandler, request){
+        let id = request["id"];
+
+        this.usersManager.get_users((users)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+                users: users
+            }));
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
+
 }
 
 

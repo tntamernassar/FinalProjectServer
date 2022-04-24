@@ -65,5 +65,10 @@ class UsersManager{
         }, err);
     }
 
+    get_users(cont, err){
+        this.db.executeSearch("SELECT * FROM Users", [], (users)=>{
+            cont(users);
+        }, err);
+    }
 }
 module.exports = UsersManager;

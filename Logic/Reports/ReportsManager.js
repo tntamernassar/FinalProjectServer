@@ -6,7 +6,9 @@ class ReportsManager{
     static mappings = {
         "tracers": "Tracers.json",
         "e3": "E3.json",
-        "counters": "Counters.json"
+        "counters": "Counters.json",
+        "chemicals": "Chemicals.json",
+        "PMs": "PMs.json"
     };
 
     constructor() {
@@ -19,12 +21,12 @@ class ReportsManager{
             this.file_service.read_fs(ReportsManager.mappings[report], (e, content) => {
                 if(e){
                     err(e);
-                }else {
+                } else {
                     cont(JSON.parse(content));
                 }
             });
         }else {
-            err("Can't find report " + report)
+            err("Can't find report: " + report)
         }
     }
 
