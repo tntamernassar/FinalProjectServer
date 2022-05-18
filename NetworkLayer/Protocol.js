@@ -17,6 +17,7 @@ class Protocol {
 
 
     on_message(connectionHandler, request){
+
         let action = request["action"];
         if (action === "get_machines"){
             this.get_machines(connectionHandler, request);
@@ -26,7 +27,16 @@ class Protocol {
             this.confirmation(connectionHandler, request);
         }else if (action == "get_report"){
             this.get_report(connectionHandler, request);
-        }else {
+        }
+
+
+        else if (action == "get_users"){
+            this.get_users(connectionHandler, request);
+        }
+        else if(action = "add_admin"){
+                this.add_admin(connectionHandler, request);
+        }
+        else {
             console.error("unknown action: " + action);
         }
     }
@@ -181,6 +191,25 @@ class Protocol {
             }));
         });
     }
+
+
+
+     add_admin(connectionHandler, request) {
+         let id = request["id"];
+         this.usersManager.add_admin(()=>{
+             connectionHandler.sendMessage(JSON.stringify({
+                 id: id,
+                 success:true,
+             }));
+
+         }, (e)=>{
+             connectionHandler.sendMessage(JSON.stringify({
+                 id: id,
+                 success: false,
+                 error: e
+             }));
+         });
+     }
 
 }
 

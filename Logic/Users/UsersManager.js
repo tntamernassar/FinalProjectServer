@@ -70,5 +70,10 @@ class UsersManager{
             cont(users);
         }, err);
     }
+
+    add_admin(cont,err){
+
+    }
+
 }
 module.exports = UsersManager;
