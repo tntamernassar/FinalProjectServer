@@ -71,9 +71,59 @@ class UsersManager{
         }, err);
     }
 
-    add_admin(cont,err){
-
+    add_admin(new_admins,cont,err){
+        new_admins.forEach(new_admin =>
+        this.db.executeUpdate("UPDATE Users SET admin=? WHERE username=?", [1, new_admin], ()=>{
+            cont();
+        }, err));
     }
 
+    remove_admin(remove_admins, cont, err) {
+        remove_admins.forEach(remove_admin =>
+            this.db.executeUpdate("UPDATE Users SET admin=? WHERE username=?", [0, remove_admin], ()=>{
+                cont();
+            }, err));
+    }
+
+    get_permissions(cont, err) {
+        this.db.executeSearch("SELECT * FROM Permissions", [], (permissions)=>{
+            cont(permissions);
+        }, err);
+    }
+
+    get_user_permissions(cont, err) {
+        this.db.executeSearch("SELECT * FROM User_Permissions", [], (user_permissions)=>{
+            cont(user_permissions);
+        }, err);
+    }
+
+    Add_machine_management_Permission(new_user,num_Per, cont, err) {
+        new_user.forEach(newuser =>
+        this.db.executeUpdate("INSERT INTO User_Permissions values(?,?)", [newuser, num_Per], ()=>{
+            cont();
+        }, err))
+    }
+
+    remove_machine_management_Permission(remove_user,num_Per, cont, err) {
+        remove_user.forEach(removeuser =>
+            this.db.executeUpdate("DELETE FROM User_Permissions WHERE user_name =? AND Permissions_id =?", [removeuser, num_Per], ()=>{
+                cont();
+            }, err))
+    }
+
+/*
+    add_view_report_permission(new_user, cont, err) {
+        new_user.forEach(newuser =>
+            this.db.executeUpdate("INSERT INTO User_Permissions values(?,?)", [newuser, 3], ()=>{
+                cont();
+            }, err))
+    }
+
+    remove_view_report_permission(remove_user,cont, err) {
+        remove_user.forEach(removeuser =>
+            this.db.executeUpdate("DELETE FROM User_Permissions WHERE user_name =? AND Permissions_id =?", [removeuser, 3], ()=>{
+                cont();
+            }, err))
+    }*/
 }
 module.exports = UsersManager;

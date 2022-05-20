@@ -33,9 +33,39 @@ class Protocol {
         else if (action == "get_users"){
             this.get_users(connectionHandler, request);
         }
-        else if(action = "add_admin"){
+        else if(action == "add_admin"){
                 this.add_admin(connectionHandler, request);
         }
+        else if(action == "remove_admin"){
+            this.remove_admin(connectionHandler, request);
+        }
+
+
+        else if(action == "get_permissions"){
+            this.get_permissions(connectionHandler, request);
+        }
+        else if(action == "get_user_permissions"){
+            this.get_user_permissions(connectionHandler, request);
+        }
+
+
+        else if(action == "Add_machine_management_Permission"){
+            this.Add_machine_management_Permission(connectionHandler, request);
+        }
+        else if(action == "remove_machine_management_permission"){
+            this.remove_machine_management_permission(connectionHandler, request);
+        }
+        else if(action == "add_view_report_permission"){
+            this.Add_machine_management_Permission(connectionHandler, request);
+        }
+        else if(action == "remove_view_report_permission"){
+            this.remove_machine_management_permission(connectionHandler, request);
+        }
+
+
+
+
+
         else {
             console.error("unknown action: " + action);
         }
@@ -196,7 +226,8 @@ class Protocol {
 
      add_admin(connectionHandler, request) {
          let id = request["id"];
-         this.usersManager.add_admin(()=>{
+         let new_admins = request["usernames"];
+         this.usersManager.add_admin(new_admins,()=>{
              connectionHandler.sendMessage(JSON.stringify({
                  id: id,
                  success:true,
@@ -211,6 +242,139 @@ class Protocol {
          });
      }
 
+    remove_admin(connectionHandler, request) {
+        let id = request["id"];
+        let remove_admins = request["usernames"];
+        this.usersManager.remove_admin(remove_admins,()=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+            }));
+
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
+
+
+    get_permissions(connectionHandler, request) {
+        let id = request["id"];
+        this.usersManager.get_permissions((permissions)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+                permissions: permissions
+
+            }));
+
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+
+            }));
+        });
+    }
+
+    get_user_permissions(connectionHandler, request) {
+        let id = request["id"];
+        this.usersManager.get_user_permissions((user_permissions)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+                user_permissions: user_permissions
+
+            }));
+
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
+
+    Add_machine_management_Permission(connectionHandler, request) {
+        let id = request["id"];
+        let new_user = request["usernames"];
+        let num_Per = request["num_Per"];
+
+        this.usersManager.Add_machine_management_Permission(new_user,num_Per,()=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+            }));
+
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
+/*
+    add_view_report_permission(connectionHandler, request) {
+        let id = request["id"];
+        let new_user = request["usernames"];
+        this.usersManager.add_view_report_permission(new_user,()=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+            }));
+
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }*/
+
+    remove_machine_management_permission(connectionHandler, request) {
+        let id = request["id"];
+        let remove_user = request["usernames"];
+        let num_Per = request["num_Per"];
+
+        this.usersManager.remove_machine_management_Permission(remove_user, num_Per,() => {
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: true,
+            }));
+
+        }, (e) => {
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
+/*
+    remove_view_report_permission(connectionHandler, request) {
+        let id = request["id"];
+        let remove_user = request["usernames"];
+        this.usersManager.remove_view_report_permission(remove_user, () => {
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: true,
+            }));
+
+        }, (e) => {
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }*/
 }
 
 
