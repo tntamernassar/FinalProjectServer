@@ -23,7 +23,7 @@ class UsersManager{
         this.email_service.sendTextEmail(email, "Dashboard confirmation", "Hi ! your confirmation code is : " + uid, cont);
     }
 
-    request_login(email, cont, err){
+    request_login(email,firstname,lastname, cont, err){
         let _cont = (uid)=>{
             this.send_confirmation_email(email, uid, (error, info)=>{
                if (error){
@@ -40,7 +40,7 @@ class UsersManager{
                         _cont(uid);
                     }, err);
                 }else{
-                    this.db.executeUpdate("INSERT INTO Users values(?,?,?,?,?,?)", [uid, email, "fname", "lname", uid, 0], ()=>{
+                    this.db.executeUpdate("INSERT INTO Users values(?,?,?,?,?,?)", [firstname+" "+lastname, email, firstname, lastname, uid, 0], ()=>{
                         _cont(uid);
                     }, err)
                 }

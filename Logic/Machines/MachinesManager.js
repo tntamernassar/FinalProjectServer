@@ -8,8 +8,6 @@ class MachinesManager{
         this.local_database = LocalDatabase.get_instance();
         this.file_service = Services.file_service;
     }
-
-
     get_attributes(machine_name, attributes, MachinesInfo){
         let machine_json = MachinesInfo.filter((m)=>m["machine"] == machine_name)[0];
         if(machine_json) {
@@ -37,6 +35,7 @@ class MachinesManager{
                 err(e);
             }else {
                 let MachinesInfo = JSON.parse(content)["machines"];
+                //console.log(MachinesInfo);
                 this.local_database.executeSearch("SELECT * FROM DepartmentMachines WHERE department=?", [department], (rows) => {
                     let machines = rows.map((row) => row["machine"]);
                     let done = 0;
@@ -44,6 +43,7 @@ class MachinesManager{
                     machines.forEach((machine, index) => {
                         this.local_database.executeSearch("SELECT * FROM MachineAttributes WHERE department=? AND machine=?", [department, machine], (_rows) => {
                             let attributes = _rows.map((row) => row["attribute"]);
+                            //console.log(attributes);
                             let machineInfo = this.get_attributes(machine, attributes, MachinesInfo);
                             if (machineInfo) {
                                 result.push({
