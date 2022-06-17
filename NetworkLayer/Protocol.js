@@ -125,12 +125,8 @@ class Protocol {
     request_login(connectionHandler, request){
         let id = request["id"];
         let email = request["email"];
-        let firstname=request["firstname"];
-        let lastname=request["lastname"];
-        console.log(firstname);
-        console.log(lastname);
         if (email){
-            this.usersManager.request_login(email,firstname,lastname, (uid)=>{
+            this.usersManager.request_login(email, (uid)=>{
                 connectionHandler.sendMessage(JSON.stringify({id: id, success: true}));
             }, (err)=>{
                 connectionHandler.sendMessage(JSON.stringify({id: id, success: false}));
