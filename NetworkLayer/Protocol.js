@@ -39,6 +39,12 @@ class Protocol {
         else if(action == "remove_admin"){
             this.remove_admin(connectionHandler, request);
         }
+        else if(action == "add_user"){
+            this.add_user(connectionHandler, request);
+        }
+        else if(action == "remove_user"){
+            this.remove_user(connectionHandler, request);
+        }
 
 
         else if(action == "get_permissions"){
@@ -361,6 +367,25 @@ class Protocol {
             }));
         });
     }
+
+
+    remove_user(connectionHandler, request) {
+        let id = request["id"];
+        let remove_users = request["usernames"];
+        this.usersManager.remove_user(remove_users,()=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+            }));
+
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
 /*
     remove_view_report_permission(connectionHandler, request) {
         let id = request["id"];
@@ -379,6 +404,27 @@ class Protocol {
             }));
         });
     }*/
+
+    add_user(connectionHandler, request) {
+        let id = request["id"];
+        let email = request["email"];
+        let fname = request["fname"];
+        let lname = request["lname"];
+
+        this.usersManager.Add_user(email,fname,lname,()=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+            }));
+
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
 }
 
 
