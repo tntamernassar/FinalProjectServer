@@ -153,5 +153,19 @@ class UsersManager{
 
         }, err);
     }
+
+    add_machine(new_machines, cont, err) {
+        new_machines.forEach(new_machine =>
+            this.db.executeUpdate("INSERT INTO DepartmentMachines values(?,?)", [new_machine["department"], new_machine["machine"]], ()=>{
+                cont();
+            }, err))
+    }
+
+    remove_machines(remove_machines, cont, err) {
+        remove_machines.forEach(remove_machine =>
+            this.db.executeUpdate("DELETE FROM DepartmentMachines WHERE machine =?", [remove_machine["name"]], ()=>{
+                cont();
+            }, err))
+    }
 }
 module.exports = UsersManager;

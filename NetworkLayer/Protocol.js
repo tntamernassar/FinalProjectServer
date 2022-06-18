@@ -21,12 +21,18 @@ class Protocol {
         let action = request["action"];
         if (action === "get_machines"){
             this.get_machines(connectionHandler, request);
+        }else if (action === "getAll_machines") {
+            this.getAll_machines(connectionHandler, request)
         }else if (action === "request_login"){
             this.request_login(connectionHandler, request)
         }else if (action === "confirmation"){
             this.confirmation(connectionHandler, request);
         }else if (action == "get_report"){
             this.get_report(connectionHandler, request);
+        }else if (action == "add_machine"){
+            this.add_machine(connectionHandler, request);
+        }else if (action == "remove_machines"){
+            this.remove_machines(connectionHandler, request);
         }
 
 
@@ -408,6 +414,61 @@ class Protocol {
         let lname = request["lname"];
 
         this.usersManager.Add_user(email,fname,lname,()=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+            }));
+
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
+
+    getAll_machines(connectionHandler, request) {
+        let id = request["id"];
+        this.machineManager.getAll_machines(connectionHandler, request, (result)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+                machines: result
+            }));
+        }, (err)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: err
+            }));
+        });
+    }
+
+    add_machine(connectionHandler, request) {
+        let id = request["id"];
+        let new_machines = request["new_machines"];
+
+        this.usersManager.add_machine(new_machines,()=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+            }));
+
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
+
+    remove_machines(connectionHandler, request) {
+        let id = request["id"];
+        let remove_machines = request["remove_machines"];
+
+        this.usersManager.remove_machines(remove_machines,()=>{
             connectionHandler.sendMessage(JSON.stringify({
                 id: id,
                 success:true,
