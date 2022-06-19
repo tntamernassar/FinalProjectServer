@@ -66,6 +66,18 @@ class MachinesManager{
 
     }
 
+    getAll_machines(connectionHandler, request, cont, err) {
+        let department = request["department"];
+        this.file_service.read_fs("MachinesInfo.json", (e, content)=> {
+            if (e) {
+                err(e);
+            } else {
+                let MachinesInfo = JSON.parse(content)["machines"];
+                cont(MachinesInfo);
+
+            }
+        })
+    }
 }
 
 module.exports = MachinesManager;

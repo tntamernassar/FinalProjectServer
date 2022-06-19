@@ -21,12 +21,18 @@ class Protocol {
         let action = request["action"];
         if (action === "get_machines"){
             this.get_machines(connectionHandler, request);
+        }else if (action === "getAll_machines") {
+            this.getAll_machines(connectionHandler, request)
         }else if (action === "request_login"){
             this.request_login(connectionHandler, request)
         }else if (action === "confirmation"){
             this.confirmation(connectionHandler, request);
         }else if (action == "get_report"){
             this.get_report(connectionHandler, request);
+        }else if (action == "add_machine"){
+            this.add_machine(connectionHandler, request);
+        }else if (action == "remove_machines"){
+            this.remove_machines(connectionHandler, request);
         }
 
 
@@ -38,6 +44,12 @@ class Protocol {
         }
         else if(action == "remove_admin"){
             this.remove_admin(connectionHandler, request);
+        }
+        else if(action == "add_user"){
+            this.add_user(connectionHandler, request);
+        }
+        else if(action == "remove_user"){
+            this.remove_user(connectionHandler, request);
         }
 
 
@@ -357,6 +369,25 @@ class Protocol {
             }));
         });
     }
+
+
+    remove_user(connectionHandler, request) {
+        let id = request["id"];
+        let remove_users = request["usernames"];
+        this.usersManager.remove_user(remove_users,()=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+            }));
+
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
 /*
     remove_view_report_permission(connectionHandler, request) {
         let id = request["id"];
@@ -375,6 +406,82 @@ class Protocol {
             }));
         });
     }*/
+
+    add_user(connectionHandler, request) {
+        let id = request["id"];
+        let email = request["email"];
+        let fname = request["fname"];
+        let lname = request["lname"];
+
+        this.usersManager.Add_user(email,fname,lname,()=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+            }));
+
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
+
+    getAll_machines(connectionHandler, request) {
+        let id = request["id"];
+        this.machineManager.getAll_machines(connectionHandler, request, (result)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+                machines: result
+            }));
+        }, (err)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: err
+            }));
+        });
+    }
+
+    add_machine(connectionHandler, request) {
+        let id = request["id"];
+        let new_machines = request["new_machines"];
+
+        this.usersManager.add_machine(new_machines,()=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+            }));
+
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
+
+    remove_machines(connectionHandler, request) {
+        let id = request["id"];
+        let remove_machines = request["remove_machines"];
+
+        this.usersManager.remove_machines(remove_machines,()=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+            }));
+
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
 }
 
 

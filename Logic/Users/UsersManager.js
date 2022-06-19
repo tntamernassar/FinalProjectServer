@@ -121,5 +121,51 @@ class UsersManager{
                 cont();
             }, err))
     }*/
+    remove_user(remove_users,cont, err) {
+        remove_users.forEach(remove_user =>
+            this.db.executeUpdate("DELETE FROM Users WHERE username =? ", [remove_user], ()=>{
+                cont();
+            }, err));
+    }
+
+    Add_user(email,firstname,lastname, cont, err){
+        let _cont = (uid)=>{
+            this.send_confirmation_email(email, uid, (error, info)=>{
+                if (error){
+                    err(error);
+                } else {
+                    cont();
+                }
+            });
+        };
+        this.db.executeSearch("SELECT * FROM Users WHERE email=?", [email], (rows)=>{
+            this.generate_uid(6, (uid)=>{
+                if (rows.length > 0 ){
+                    this.db.executeUpdate("UPDATE Users SET uid=? WHERE email=?", [uid, email], ()=>{
+                        _cont(uid);
+                    }, err);
+                }else{
+                    this.db.executeUpdate("INSERT INTO Users values(?,?,?,?,?,?)", [firstname+""+lastname, email, firstname, lastname, uid, 0], ()=>{
+                        _cont(uid);
+                    }, err)
+                }
+            });
+
+        }, err);
+    }
+
+    add_machine(new_machines, cont, err) {
+        new_machines.forEach(new_machine =>
+            this.db.executeUpdate("INSERT INTO DepartmentMachines values(?,?)", [new_machine["department"], new_machine["machine"]], ()=>{
+                cont();
+            }, err))
+    }
+
+    remove_machines(remove_machines, cont, err) {
+        remove_machines.forEach(remove_machine =>
+            this.db.executeUpdate("DELETE FROM DepartmentMachines WHERE machine =?", [remove_machine["name"]], ()=>{
+                cont();
+            }, err))
+    }
 }
 module.exports = UsersManager;
