@@ -167,5 +167,19 @@ class UsersManager{
                 cont();
             }, err))
     }
+
+    add_machine_attributes(machine,new_attributes,cont, err) {
+        new_attributes.forEach(new_attribute =>
+            this.db.executeUpdate("INSERT INTO MachineAttributes values(?,?,?)", [machine["department"],machine["machine"],new_attribute], ()=>{
+                cont();
+            }, err))
+    }
+
+    remove_machine_attributes(machine, remove_attributes,cont, err) {
+        remove_attributes.forEach(remove_attribute =>
+            this.db.executeUpdate("DELETE FROM MachineAttributes WHERE machine =? AND attribute =?", [machine["name"], remove_attribute], ()=>{
+                cont();
+            }, err))
+    }
 }
 module.exports = UsersManager;

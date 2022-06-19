@@ -33,6 +33,10 @@ class Protocol {
             this.add_machine(connectionHandler, request);
         }else if (action == "remove_machines"){
             this.remove_machines(connectionHandler, request);
+        }else if (action == "add_machine_attributes"){
+            this.add_machine_attributes(connectionHandler, request);
+        }else if (action == "remove_machine_attributes"){
+            this.remove_machine_attributes(connectionHandler, request);
         }
 
 
@@ -469,6 +473,44 @@ class Protocol {
         let remove_machines = request["remove_machines"];
 
         this.usersManager.remove_machines(remove_machines,()=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+            }));
+
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
+
+    add_machine_attributes(connectionHandler, request) {
+        let id = request["id"];
+        let new_attributes = request["new_attributes"];
+        let machine = request["machine"];
+        this.usersManager.add_machine_attributes(machine,new_attributes,()=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+            }));
+
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
+
+    remove_machine_attributes(connectionHandler, request) {
+        let id = request["id"];
+        let remove_attributes = request["remove_attributes"];
+        let machine = request["machine"];
+        this.usersManager.remove_machine_attributes(machine,remove_attributes,()=>{
             connectionHandler.sendMessage(JSON.stringify({
                 id: id,
                 success:true,
