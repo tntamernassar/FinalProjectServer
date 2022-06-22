@@ -1,11 +1,15 @@
 const LocalDatabase = require('../../Databases/LocalDatabase/LocalDatabase');
 const Services = require("../../Services/Services");
+const NotificationsManager = require("../Notfications/NotificationsManager");
+
+
 
 class UsersManager{
 
     constructor() {
         this.db = LocalDatabase.get_instance();
         this.email_service = Services.email_service;
+        this.notification_manager = new NotificationsManager();
     }
 
     generate_uid(length, cont){
@@ -125,39 +129,26 @@ class UsersManager{
         remove_users.forEach(remove_user =>
             this.db.executeUpdate("DELETE FROM Users WHERE username =? ", [remove_user], ()=>{
                 cont();
+                //send_mail
+                this.notification_manager.notifyAboutRemoveUser(remove_user);
             }, err));
     }
 
-    Add_user(email,firstname,lastname, cont, err){
-        let _cont = (uid)=>{
-            this.send_confirmation_email(email, uid, (error, info)=>{
-                if (error){
-                    err(error);
-                } else {
-                    cont();
-                }
-            });
-        };
-        this.db.executeSearch("SELECT * FROM Users WHERE email=?", [email], (rows)=>{
-            this.generate_uid(6, (uid)=>{
-                if (rows.length > 0 ){
-                    this.db.executeUpdate("UPDATE Users SET uid=? WHERE email=?", [uid, email], ()=>{
-                        _cont(uid);
-                    }, err);
-                }else{
-                    this.db.executeUpdate("INSERT INTO Users values(?,?,?,?,?,?)", [firstname+""+lastname, email, firstname, lastname, uid, 0], ()=>{
-                        _cont(uid);
-                    }, err)
-                }
-            });
+    Add_user(email,firstname,lastname, cont, err) {
 
-        }, err);
+        this.db.executeSearch("SELECT * FROM Users WHERE email=?", [email], (rows) => {
+            this.db.executeUpdate("INSERT INTO Users values(?,?,?,?,?,?)", [firstname + "" + lastname, email, firstname, lastname, "", 0], () => {
+                cont();
+            }, err)
+            this.notification_manager.notifyAboutNewUser(email, firstname, lastname);
+        });
     }
 
     add_machine(new_machines, cont, err) {
         new_machines.forEach(new_machine =>
             this.db.executeUpdate("INSERT INTO DepartmentMachines values(?,?)", [new_machine["department"], new_machine["machine"]], ()=>{
                 cont();
+                this.notification_manager.notifyAboutNewMachineAdded(new_machine["department"], new_machine["machine"]);
             }, err))
     }
 
@@ -165,7 +156,9 @@ class UsersManager{
         remove_machines.forEach(remove_machine =>
             this.db.executeUpdate("DELETE FROM DepartmentMachines WHERE machine =?", [remove_machine["name"]], ()=>{
                 cont();
+                this.notification_manager.notifyAboutRemoveMachine(remove_machine["department"], remove_machine["name"]);
             }, err))
+
     }
 
     add_machine_attributes(machine,new_attributes,cont, err) {
@@ -178,6 +171,26 @@ class UsersManager{
     remove_machine_attributes(machine, remove_attributes,cont, err) {
         remove_attributes.forEach(remove_attribute =>
             this.db.executeUpdate("DELETE FROM MachineAttributes WHERE machine =? AND attribute =?", [machine["name"], remove_attribute], ()=>{
+                cont();
+            }, err))
+    }
+
+    get_notification(cont, err) {
+        this.db.executeSearch("SELECT * FROM NotificationsSubscribers", [], (notification)=>{
+            cont(notification);
+        }, err);
+    }
+
+    remove_notification(notification, cont, err) {
+        notification.forEach(notification1 =>
+            this.db.executeUpdate("DELETE FROM NotificationsSubscribers WHERE email =? and notification_id = ?", [notification1["email"],notification1["notification_id"]], ()=>{
+                cont();
+            }, err))
+    }
+
+    add_new_notification(notification, user, cont, err) {
+        notification.forEach(notification1 =>
+            this.db.executeUpdate("INSERT INTO NotificationsSubscribers values(?,?)", [user["email"],notification1], ()=>{
                 cont();
             }, err))
     }

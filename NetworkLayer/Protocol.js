@@ -40,6 +40,26 @@ class Protocol {
         }
 
 
+        else if (action == "get_notification"){
+            this.get_notification(connectionHandler, request);
+        }
+
+        else if (action == "remove_notification"){
+            this.remove_notification(connectionHandler, request);
+        }
+
+
+
+        else if (action == "add_new_notification"){
+            this.add_new_notification(connectionHandler, request);
+        }
+
+
+
+
+        
+
+
         else if (action == "get_users"){
             this.get_users(connectionHandler, request);
         }
@@ -516,6 +536,63 @@ class Protocol {
                 success:true,
             }));
 
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
+
+    get_notification(connectionHandler, request) {
+        let id = request["id"];
+
+        this.usersManager.get_notification((notification)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+                notification: notification
+            }));
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
+
+    remove_notification(connectionHandler, request) {
+        let id = request["id"];
+        let notification = request["notification"];
+
+        this.usersManager.remove_notification(notification,()=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+            }));
+
+        }, (e)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success: false,
+                error: e
+            }));
+        });
+    }
+
+    add_new_notification(connectionHandler, request) {
+        let id = request["id"];
+        let notification = request["notification"];
+        let user = request["user"];
+
+        this.usersManager.add_new_notification(notification,user,(notification)=>{
+            connectionHandler.sendMessage(JSON.stringify({
+                id: id,
+                success:true,
+                notification: notification
+            }));
         }, (e)=>{
             connectionHandler.sendMessage(JSON.stringify({
                 id: id,
