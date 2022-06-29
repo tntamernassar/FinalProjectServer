@@ -7,12 +7,8 @@ let manager=new UsersManager();
 
 LocalDatabase.init(root + "/" + "db/database.db");
 let db=LocalDatabase.get_instance();
-let x=-1,y=-1;
-beforeAll(()=>{
-    db.executeSearch("select * from MachineAttributes",[],(rows)=>{
-        x=Object.keys(rows).length;
-    },()=>{});
-});
+
+
 
 let machine={
     'Department':'BGU',
@@ -21,15 +17,17 @@ let machine={
 let attributes=['att1','att2'];
 
 test("add attributes",()=>{
-    manager.add_machine_attributes(machine,attributes,()=>{},()=>{});
-    db.executeSearch("select * from MachineAttributes",[],(rows)=>{
-        y=Object.keys(rows).length;
-
-    },()=>{});
-    expect(y).toBe(x+2);
+   db.executeSearch("select * from MachineAttributes",[],(rows)=>{
+       let x = Object.keys(rows).length;
+       manager.add_machine_attributes(machine,attributes,()=>{
+           db.executeSearch("select * from MachineAttributes",[],(rows2)=>{
+               let y=Object.keys(rows2).length;
+               expect(y).toBe(x+2);
+           },()=>{fail()})
+       },()=>{
+           fail()
+       })
+   },()=>{
+       fail()
+   })
 });
-
-afterAll(()=>{
-    manager.remove_machine_attributes(machine,attributes,()=>{},()=>{});
-
-})

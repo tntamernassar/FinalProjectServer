@@ -6,12 +6,12 @@ Databases.init(root + "/" + "db/database.db");
 let manager=new UsersManager();
 
 
-test("test get users1",  ()=>{
-    manager.get_users((users) => {
-        let x = Object.keys(users).length;
-        expect(x).toBe(3);
+test("test get notifications",  ()=>{
+    manager.get_notification((nots) => {
+        let x = Object.keys(nots).length;
+        expect(x).toBe(4);
     }, (e) => {
-        fail("failed to get users from the db");
+        fail("failed to get nots from the db");
     });
 
 });
