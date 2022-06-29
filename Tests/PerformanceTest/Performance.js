@@ -1,11 +1,5 @@
 const WebSocket = require('ws');
 
-let socket = new WebSocket("ws://localhost:8080/");
-
-
-const send = (request)=>{
-    socket.send(JSON.stringify(request));
-}
 
 const IDAllocator = {
     ID: 0,
@@ -45,6 +39,8 @@ const PerformanceTests = {
 
     runTests: ()=>{
         PerformanceTests.test2000NewUsers();
+        PerformanceTests.test70ConcurrentUsers();
+        PerformanceTests.test10SecondsResponse();
     },
 
     test2000NewUsers: ()=>{
@@ -60,14 +56,11 @@ const PerformanceTests = {
                 }, (response) => {
                     if (response["success"]){
                         successes++;
-                    }else{
-                        console.log(response);
                     }
                 });
             }
 
             setTimeout(()=>{
-                console.log(successes);
                 if(successes == numOfUsers){
                     console.log("PASSED : Test 2000 New Users")
                 }else{
@@ -76,6 +69,53 @@ const PerformanceTests = {
             }, 100000);
         });
 
+    },
+
+    test70ConcurrentUsers: ()=>{
+        let sockets = [];
+        let connects = 0;
+        for(let i = 0; i< 70; i ++ ){
+            sockets.push(SocketManager.makeSocket(()=>{
+                connects ++;
+            }));
+        }
+        setTimeout(()=>{
+            if (connects === sockets.length){
+                console.log("PASSED : Test 70 concurrent users");
+            }else{
+                console.log("FAILED: Test 70 concurrent users")
+            }
+        }, 3000);
+    },
+
+    test10SecondsResponse: ()=> {
+        let socket = SocketManager.makeSocket(() => {
+            let diff1 = 0, diff2 = 0;
+            let time = new Date();
+            SocketManager.sendMessage(socket, {
+                "action": "get_report",
+                "report": "e3"
+            }, (response) => {
+                let time2 = new Date();
+                const diffTime = Math.abs(time2 - time);
+                diff1 = Math.ceil(diffTime / (1000 * 60 * 60));
+
+                time = new Date();
+                SocketManager.sendMessage(socket, {
+                    "action": "get_users",
+                }, (response) => {
+                    let time2 = new Date();
+                    const diffTime = Math.abs(time2 - time);
+                    diff2 = Math.ceil(diffTime / (1000 * 60 * 60));
+                    if (diff1 <= 10 && diff2 <= 10){
+                        console.log("PASSED : Test 10 seconds response");
+                    }
+                    else{
+                        console.log("FAILED : Test 10 seconds response");
+                    }
+                });
+            });
+        });
     }
 
 }

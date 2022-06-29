@@ -2,28 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8132d5b9-144f-4c37-928a-0e5f6c44af97" name="Default Changelist" comment="Perfomance Test">
-      <change afterPath="$PROJECT_DIR$/Tests/PerformanceTest/Performance.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logic/Users/UsersManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/Logic/Users/UsersManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/Services.js" beforeDir="false" afterPath="$PROJECT_DIR$/Services/Services.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/Add_machine_management_Permission.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/Add_machine_management_Permission.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/Uid.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/Uid.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/add_Admin.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/add_Admin.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/add_machine.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/add_machine.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/add_machine_attributes.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/add_machine_attributes.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/add_user.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/add_user.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/confirmation.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/confirmation.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/get_permissions.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/get_permissions.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/get_report_data.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/get_report_data.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/get_user_permission.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/get_user_permission.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/get_users.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/get_users.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/remove_admin.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/remove_admin.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/remove_machine.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/remove_machine.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/remove_machine_attribute.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/remove_machine_attribute.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/remove_machine_managmet_permission.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/remove_machine_managmet_permission.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/remove_user.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/remove_user.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/PerformanceTest/Performance.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/PerformanceTest/Performance.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +88,7 @@
       <workItem from="1655544437663" duration="700000" />
       <workItem from="1655555868399" duration="9356000" />
       <workItem from="1656406675753" duration="963000" />
-      <workItem from="1656521334511" duration="6577000" />
+      <workItem from="1656521334511" duration="8316000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1639513851436</created>
@@ -187,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640127751486</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Perfomance Test">
+      <created>1656531112163</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1656531112163</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
