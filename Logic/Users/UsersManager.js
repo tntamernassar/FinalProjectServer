@@ -139,9 +139,9 @@ class UsersManager{
     }
 
     Add_user(email,firstname,lastname, cont, err) {
-
+        let username = email.substring(0, email.indexOf('@'));
         this.db.executeSearch("SELECT * FROM Users WHERE email=?", [email], (rows) => {
-            this.db.executeUpdate("INSERT INTO Users values(?,?,?,?,?,?)", [firstname + "" + lastname, email, firstname, lastname, "", 0], () => {
+            this.db.executeUpdate("INSERT INTO Users values(?,?,?,?,?,?)", [username, email, firstname, lastname, "", 0], () => {
                 this.db.executeUpdate("INSERT INTO User_Permissions values(?,?)", [firstname + "" + lastname, 0], ()=>{
                     cont();
                 }, err);

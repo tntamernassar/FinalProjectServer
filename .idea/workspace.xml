@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8132d5b9-144f-4c37-928a-0e5f6c44af97" name="Default Changelist" comment="">
+    <list default="true" id="8132d5b9-144f-4c37-928a-0e5f6c44af97" name="Default Changelist" comment="Perfomance Test">
+      <change afterPath="$PROJECT_DIR$/Tests/PerformanceTest/Performance.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logic/Users/UsersManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/Logic/Users/UsersManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/Services.js" beforeDir="false" afterPath="$PROJECT_DIR$/Services/Services.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/Add_machine_management_Permission.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/Add_machine_management_Permission.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/Uid.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/Uid.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/add_Admin.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/add_Admin.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/add_machine.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/add_machine.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/add_machine_attributes.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/add_machine_attributes.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/add_user.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/add_user.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/confirmation.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/confirmation.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/get_permissions.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/get_permissions.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/get_report_data.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/get_report_data.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/get_user_permission.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/get_user_permission.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/get_users.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/get_users.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/remove_admin.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/remove_admin.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/remove_machine.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/remove_machine.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/remove_machine_attribute.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/remove_machine_attribute.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/remove_machine_managmet_permission.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/remove_machine_managmet_permission.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/remove_user.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/unitTests/remove_user.test.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,12 +40,10 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
-  <component name="JsFlowSettings">
-    <service-enabled>true</service-enabled>
-    <exe-path />
-    <other-services-enabled>true</other-services-enabled>
-    <auto-save>true</auto-save>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="22I4QynJLZdfaEpwS8nDfkb9mOK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -32,17 +51,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="javascript.nodejs.core.library.configured.version" value="13.12.0" />
-    <property name="javascript.nodejs.core.library.typings.version" value="13.13.52" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Services/EmailService" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;16.15.1&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;16.11.41&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/t-afadila/WebstormProjects/FinalProjectFrontEnd&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.nodejs&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\FinalProjectServer\FinalProjectServer\Services\EmailService" />
@@ -51,6 +72,7 @@
       <recent name="C:\Users\tamernas\PycharmProjects\TGRServer\NetworkLayer" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\t-afadila\WebstormProjects\FinalProjectServer\Tests" />
       <recent name="C:\Users\tamernas\PycharmProjects\TGRServer\Services\FileService" />
       <recent name="C:\Users\tamernas\PycharmProjects\TGRServer\Services\EmailService" />
     </key>
@@ -80,6 +102,13 @@
       <workItem from="1640013384704" duration="8951000" />
       <workItem from="1640114888042" duration="7839000" />
       <workItem from="1640248205497" duration="2119000" />
+      <workItem from="1655498513109" duration="1312000" />
+      <workItem from="1655502996608" duration="296000" />
+      <workItem from="1655504108188" duration="2476000" />
+      <workItem from="1655544437663" duration="700000" />
+      <workItem from="1655555868399" duration="9356000" />
+      <workItem from="1656406675753" duration="963000" />
+      <workItem from="1656521334511" duration="6577000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1639513851436</created>
@@ -164,6 +193,17 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Constructing connection pipe" />
@@ -171,42 +211,11 @@
     <MESSAGE value="Adding email mock" />
     <MESSAGE value="Reading machines from local database" />
     <MESSAGE value="Reading machines attributes from file system" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reading machines attributes from file system" />
+    <MESSAGE value="Perfomance Test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Perfomance Test" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="-1241" y="97" key="CommitChangelistDialog2" timestamp="1640127748939">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1241" y="97" key="CommitChangelistDialog2/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640127748939" />
-    <state x="-1655" y="97" key="CommitChangelistDialog2/0.0.1536.824/-2560.0.2560.1040@-2560.0.2560.1040" timestamp="1639513850378" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1640086114020">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640086114020" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1640086114020">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640086114020" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1640086114020">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640086114020" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1640086114020">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640086114020" />
-    <state x="-1266" y="253" key="Vcs.Push.Dialog.v2" timestamp="1640127759872">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1266" y="253" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640127759872" />
-    <state x="-1688" y="253" key="Vcs.Push.Dialog.v2/0.0.1536.824/-2560.0.2560.1040@-2560.0.2560.1040" timestamp="1639513867561" />
-    <state x="-1304" y="240" key="run.anything.popup" timestamp="1639765005633">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1304" y="240" key="run.anything.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1639765005633" />
-    <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1640126571614">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1640126571614" />
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

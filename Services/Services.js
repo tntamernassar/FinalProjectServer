@@ -10,7 +10,7 @@ class Services {
     static email_service;
 
 
-    static init(local_dir, fs_dir, cont, err){
+    static init(local_dir, fs_dir, cont){
         FileService.init(local_dir, fs_dir);
         this.file_service = FileService.get_instance();
         this.file_service.read_local("info/email.json", (err, data)=>{

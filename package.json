@@ -4,6 +4,10 @@
   "dependencies": {
     "nodemailer": "^6.7.2",
     "sqlite3": "^5.0.2",
-    "websocket": "^1.0.34"
+    "websocket": "^1.0.34",
+    "ws": "^8.8.0"
+  },
+  "devDependencies": {
+    "chromedriver": "^102.0.0"
   }
 }

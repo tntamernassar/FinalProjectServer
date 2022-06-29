@@ -1,6 +1,6 @@
-const UsersManager = require("../Logic/Users/UsersManager");
-const Databases = require("../Databases/Databases");
-const LocalDatabase = require("../Databases/LocalDatabase/LocalDatabase");
+const UsersManager = require("../../Logic/Users/UsersManager");
+const Databases = require("../../Databases/Databases");
+const LocalDatabase = require("../../Databases/LocalDatabase/LocalDatabase");
 let root = "C:/Users/mohamad/source/repos/ROOT";
 Databases.init(root + "/" + "db/database.db");
 let manager=new UsersManager();
