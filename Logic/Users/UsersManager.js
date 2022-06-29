@@ -74,7 +74,11 @@ class UsersManager{
     add_admin(new_admins,cont,err){
         new_admins.forEach(new_admin =>
         this.db.executeUpdate("UPDATE Users SET admin=? WHERE username=?", [1, new_admin], ()=>{
-            cont();
+            this.db.executeUpdate("INSERT INTO User_Permissions values(?,?)", [new_admin, 1], ()=>{
+                this.db.executeUpdate("INSERT INTO User_Permissions values(?,?)", [new_admin, 4], ()=>{
+                    cont();
+                }, err);
+            }, err);
         }, err));
     }
 
@@ -138,7 +142,9 @@ class UsersManager{
 
         this.db.executeSearch("SELECT * FROM Users WHERE email=?", [email], (rows) => {
             this.db.executeUpdate("INSERT INTO Users values(?,?,?,?,?,?)", [firstname + "" + lastname, email, firstname, lastname, "", 0], () => {
-                cont();
+                this.db.executeUpdate("INSERT INTO User_Permissions values(?,?)", [firstname + "" + lastname, 0], ()=>{
+                    cont();
+                }, err);
             }, err)
             this.notification_manager.notifyAboutNewUser(email, firstname, lastname);
         });
